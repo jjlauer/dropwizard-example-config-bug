@@ -16,9 +16,18 @@ import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
     public static void main(String[] args) throws Exception {
+        // print classpath for runtime
+        ClassLoader cl = HelloWorldApplication.class.getClassLoader();
+        URL[] urls = ((URLClassLoader)cl).getURLs();
+        for (URL url: urls) {
+            System.out.println(url.getFile());
+        }
+        
         new HelloWorldApplication().run(args);
     }
 
